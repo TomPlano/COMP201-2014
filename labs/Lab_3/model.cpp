@@ -38,7 +38,7 @@ Model::Model(int w, int h) {
             }
         }
     }
-  /*  // Seed random number generator with time
+	// Seed random number generator with time
     srand(time(0));
     // Randomize
     int otheri, otherj;
@@ -53,7 +53,7 @@ Model::Model(int w, int h) {
            grid[otheri][otherj] = letter;
         }
     }
-	*/
+
 }
 
 // Destructor deletes dynamically allocated memory

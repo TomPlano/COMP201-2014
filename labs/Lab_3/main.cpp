@@ -5,9 +5,9 @@
 #include "memory_controller.h" 
 using namespace std;
 
-//[]is the row and column valid
+//[x]is the row and column valid
 //[x]flip cells
-//[]game over state
+//[x]game over state
 
 int main() {
     Controller c;
