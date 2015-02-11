@@ -23,6 +23,8 @@ public:
     // Is the game over?
     bool gameOver();
 private:
+	//checks to see if the same cell has been entered twice in a row only
+	bool same_check(int row, int column);
     // Is the row/column valid?
     bool valid(int row, int column);
     // Did the cell at current row/column match the cell at the last row/column 

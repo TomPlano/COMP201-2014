@@ -66,12 +66,16 @@ Model::~Model() {
     delete grid;
     delete visible;
 }
-// TODO: Is the row/column valid?
-// That is, is the row within the height, and is the column within the width?
-// Return whether it is or isn't.
+
+bool Model::same_check(int row, int column){
+	if (visible[Rowlast][Columnlast]==visible[row][column]){
+		return true;
+	}
+	else{return false;}
+}
 bool Model::valid(int row, int column) {
 	//if requested row/col is between 0 and 7 and currently is not visible
-	if (((row>=0&&row<=7)&&(column>=0&&column<=7))&&visible[row][column]=='*'){
+	if ((row>=0&&row<=7)&&(column>=0&&column<=7)){
 		return true;
 	}
 }
@@ -96,6 +100,12 @@ void Model::flip(int row, int column) {
 		state=FLIPPED1;
 	}
 	else if (state==FLIPPED1){
+		
+		if (same_check(row,column))
+		{
+			cout<<"error, enter a different cell then you entered first"<<endl;
+			return;
+		}
 		visible[row][column]=grid[row][column];
 		Rowlast2=row;
 		Columnlast2=column;
