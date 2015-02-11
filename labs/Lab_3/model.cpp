@@ -12,7 +12,7 @@ Model::Model(int w, int h) {
     height = h;
     Rowlast=- 1;
     Columnlast= -1;
-	 Rowlast2=- 1;
+	Rowlast2=- 1;
     Columnlast2= -1;
     state = INITIAL;
     grid = new char*[h];
@@ -38,6 +38,7 @@ Model::Model(int w, int h) {
             }
         }
     }
+	
 	// Seed random number generator with time
     srand(time(0));
     // Randomize
@@ -100,19 +101,29 @@ void Model::flip(int row, int column) {
 		Columnlast2=column;
 		state=FLIPPED2;
 	}
+	
 	else{
 		if (matched())
 		{
-			state=INITIAL;
+			visible[row][column]=grid[row][column];
+			Rowlast=row;
+			Columnlast=column;
+			state=FLIPPED1;
 			return;
 		}
 		else{
+			//cover the non match
 		visible[Rowlast][Columnlast]='*';
 		visible[Rowlast2][Columnlast2]='*';
-		state=INITIAL;
+		//filp new
+		visible[row][column]=grid[row][column];
+		Rowlast=row;
+		Columnlast=column;
+		state=FLIPPED1;
 		return;
 		}
 	}
+	
 	
 }
 // TODO: If everything is visible, then it's game over
