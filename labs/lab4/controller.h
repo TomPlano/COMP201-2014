@@ -1,4 +1,4 @@
-#include "model.h"
+#include "memory_model.h"
 #include "view.h"
 
 #ifndef _CONTROLLER_H

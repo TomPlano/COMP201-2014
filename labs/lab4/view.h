@@ -2,7 +2,7 @@
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "model.h"
+#include "memory_model.h"
 #include <map>
 #include <string>
 

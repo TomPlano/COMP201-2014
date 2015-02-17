@@ -1,13 +1,9 @@
-#include <vector>
-
-#ifndef _MODEL_H
-#define _MODEL_H
-
-enum State { INIT, FIRST, NO_MATCH };
-
-// To clear the screen, look up ANSI escape codes
-// Concentration game model
 // The model manages the state of the game
+#ifndef MEMORY_MODEL_H
+#define MEMORY_MODEL_H
+enum State { INITIAL,FLIPPED1, FLIPPED2 };
+// Concentration game model
+
 class Model {
 public:
     // Constructor (instantiates object)
@@ -27,10 +23,12 @@ public:
     // Is the game over?
     bool gameOver();
 private:
+	//checks to see if the same cell has been entered twice in a row only
+	bool same_check(int row, int column);
     // Is the row/column valid?
     bool valid(int row, int column);
     // Did the cell at current row/column match the cell at the last row/column 
-    bool matched(int row, int column);
+    bool matched();
     // Fields (member data)
     // Randomly generated grid. This has pairs of characters in it
     char ** grid;
@@ -41,10 +39,10 @@ private:
     // What's the height?
     int height;
     // What'd we flip last?
-    std::vector<int> lastRow;
-    std::vector<int> lastColumn;
-    State state;
+    int Rowlast;
+    int Columnlast;
+	int Rowlast2;
+    int Columnlast2;
+   State state;
 };
-
-
 #endif
