@@ -4,13 +4,23 @@
 template <typename T>
 class Node {
 public:
-    Node(T d, Node * n, Node * p) { data = d; next = n; prev = p; }
-    Node(T d, Node * n) { data = d; next = n; prev = NULL; }
-    Node(T d)           { data = d; next = NULL; prev = NULL; }
+    Node(T d, Node * n, Node * p) { 
+	data = d; next = n; prev = p;
+	}
+	
+    Node(T d, Node * n) { 
+	data = d; next = n; prev = NULL; 
+	}
+	
+    Node(T d){ 
+	data = d; next = NULL; prev = NULL;
+	}
+	
     T data;
     Node * next;
     Node * prev;
 };
+
 template <typename T>
 class Stack {
 public:
@@ -36,6 +46,7 @@ private:
     Node<T> * head;
 };
 
+
 template <typename T>
 class List {
 public:
@@ -44,29 +55,54 @@ public:
         tail = NULL;
     }
     void push_front(T element) {
-        Node<T> * node = new Node<T>(element, head);
+		Node<T> * node = new Node<T>(element);
+		if (head == NULL){
         head = node;
+		tail = node;
+		}
+		else if (head!=NULL){
+		head->prev= node;
+		std::cout<< "head->preve: "<<  head->prev<<std::endl;
+		node->next = head;
+		head=node;
+		std::cout<<"node; "<<node<<std::endl;
+		node->prev =NULL;
+		}
     }
     T peek_front() {
         return head->data;
     }
     void pop_front() {
-        Node<T> * node = head->next;
-        delete head;
-        head = node;
+		Node<T> * node = head->next;
+		delete head;
+		head = node;
+		//head->prev=NULL;//
     }
     void push_back(T element) {
-    
+		Node<T> * node = new Node<T>(element);
+		if (tail == NULL){
+        head = node;
+		tail = node;
+		}
+		else if (tail!=NULL){
+		tail->next=node;
+		node->prev = tail;
+		tail=node;
+		node->next=NULL;
+		}
     }
     T peek_back() {
-    
+		return tail->data;
     }
-    void pop_back() {
-    
+    void pop_back() {  
+		Node<T> * node = tail->prev;
+        delete tail;
+        tail = node;
+		//tail->next=NULL;//
     }
     bool empty() {
-        return head == NULL && tail == NULL;
-    }
+		return head == NULL && tail == NULL;
+	}
 private:
     Node<T> * head;
     Node<T> * tail;
@@ -83,6 +119,7 @@ int main() {
     numbers.push_back(87);
     // 3, 10, 42, 87
     std::cout << (3 == numbers.peek_front()) << std::endl;
+	
     std::cout << (87 == numbers.peek_back()) << std::endl;
     numbers.pop_front();
     // 10, 42, 87
@@ -90,31 +127,14 @@ int main() {
     numbers.pop_back();
     // 10, 42
     std::cout << (42 == numbers.peek_back()) << std::endl;
-    std::cout << !numbers.empty() << std::endl;
+    std::cout << (!numbers.empty()) << std::endl;
     numbers.pop_front();
     // 10
     numbers.pop_front();
     // Empty
     std::cout << numbers.empty() << std::endl;
-/*
-    Stack<std::string> stack;
-    stack.push("world");
-    stack.push("cruel");
-    stack.push("hello");
-    std::cout << stack.top() << std::endl;
+
     
-    Node<std::string> * first = new Node<std::string>("hi");
-    Node<std::string> * second = new Node<std::string>("world");
-    first->next = second;
-    
-    for (Node<std::string> * pointer = first;
-        pointer != NULL;
-        pointer = pointer->next) {
-        std::cout << pointer->data << std::endl;
-    }
-    delete first;
-    delete second;
-    */
     return 0;
 }
 
