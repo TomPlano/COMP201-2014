@@ -56,17 +56,15 @@ public:
     }
     void push_front(T element) {
 		Node<T> * node = new Node<T>(element);
-		if (head == NULL){
-        head = node;
-		tail = node;
-		}
-		else if (head!=NULL){
+		if (head != NULL){//not first on list
 		head->prev= node;
-		std::cout<< "head->preve: "<<  head->prev<<std::endl;
 		node->next = head;
-		head=node;
-		std::cout<<"node; "<<node<<std::endl;
+        head = node;
 		node->prev =NULL;
+		}
+		if (tail==NULL){// first in list
+		head=node;
+		tail=node;
 		}
     }
     T peek_front() {
@@ -76,19 +74,24 @@ public:
 		Node<T> * node = head->next;
 		delete head;
 		head = node;
-		//head->prev=NULL;//
+		if (node!=NULL){
+		node->prev=NULL;
+		}
+		else{
+			tail=NULL;
+		}
     }
     void push_back(T element) {
 		Node<T> * node = new Node<T>(element);
-		if (tail == NULL){
-        head = node;
-		tail = node;
-		}
-		else if (tail!=NULL){
-		tail->next=node;
+		if (tail != NULL){//not first on list
+		tail->next= node;
 		node->prev = tail;
+		tail = node;
+		node->next =NULL;
+		}
+		if (head==NULL){// first in list
+		head=node;
 		tail=node;
-		node->next=NULL;
 		}
     }
     T peek_back() {
@@ -98,10 +101,31 @@ public:
 		Node<T> * node = tail->prev;
         delete tail;
         tail = node;
-		//tail->next=NULL;//
+		if (node!=NULL){
+		node->next=NULL;//
+		}
+		else{
+			head=NULL;
+		}
     }
     bool empty() {
 		return head == NULL && tail == NULL;
+	}
+	Node<T> * begin (){
+		return head;
+	}
+	Node<T> * end (){
+		return NULL;
+	}
+	Node<T> * last (){
+		return tail;
+	}
+	int size(){
+		int result= 0;
+		for (Node<T> * pointer = head; pointer !=NULL; pointer=pointer->next){
+			result++;	
+		}
+		return result;
 	}
 private:
     Node<T> * head;
