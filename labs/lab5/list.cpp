@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
-#include "list.h"
-#include"node.h"
-class List {
+
+template <typename T>
+class List{
 public:
-    List() {
+	List() {
         head = NULL;
         tail = NULL;
     }		
@@ -85,5 +85,6 @@ private:
     Node<T> * head;
     Node<T> * tail;
 };
+
 
 

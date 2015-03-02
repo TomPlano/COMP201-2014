@@ -1,5 +1,6 @@
 #include "model.h"
-#include <cstdlib>
+//#include "list2.h"
+#include <list>
 #include <ctime>
 
 using namespace std;
@@ -44,7 +45,14 @@ void Model::crawl() {
     }
     // TODO: Colliding with the perimeter of the screen should set direction to DEAD
     // When DEAD, the snake slowly shrinks down to nothing
-    
+	
+  // /* 
+	if (snake.begin.x==0 || snake.something==1024 ||snake.something==0 || snake.something==768){
+		
+		direction=DEAD;
+		
+	}
+	//*/	
     if (direction != DEAD) {
         snake.push_front(front);
     }
